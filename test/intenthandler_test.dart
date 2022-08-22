@@ -4,12 +4,17 @@ import 'package:intenthandler/intenthandler_platform_interface.dart';
 import 'package:intenthandler/intenthandler_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class MockIntenthandlerPlatform 
+class MockIntenthandlerPlatform
     with MockPlatformInterfaceMixin
     implements IntenthandlerPlatform {
 
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
+
+  @override
+  Future<String?> doPrint() {
+    return Future.value("Sample works!!");
+  }
 
 
 }
@@ -25,7 +30,15 @@ void main() {
     Intenthandler intenthandlerPlugin = Intenthandler();
     MockIntenthandlerPlatform fakePlatform = MockIntenthandlerPlatform();
     IntenthandlerPlatform.instance = fakePlatform;
-  
+
     expect(await intenthandlerPlugin.getPlatformVersion(), '42');
+  });
+
+  test("doPrint", () async {
+    Intenthandler intenthandlerPlugin = Intenthandler();
+    MockIntenthandlerPlatform fakePlatform = MockIntenthandlerPlatform();
+    IntenthandlerPlatform.instance = fakePlatform;
+
+    expect(await intenthandlerPlugin.doPrint(), "Sample works!!");
   });
 }

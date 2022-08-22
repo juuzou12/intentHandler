@@ -5,4 +5,7 @@ class Intenthandler {
   Future<String?> getPlatformVersion() {
     return IntenthandlerPlatform.instance.getPlatformVersion();
   }
+  Future<String?> doPrint() {
+    return IntenthandlerPlatform.instance.doPrint();
+  }
 }

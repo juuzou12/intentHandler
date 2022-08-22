@@ -14,4 +14,10 @@ class MethodChannelIntenthandler extends IntenthandlerPlatform {
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
+
+  @override
+  Future<String?> doPrint() async {
+    final doPrintResponse = await methodChannel.invokeMethod<String>('doPrint');
+    return doPrintResponse;
+  }
 }

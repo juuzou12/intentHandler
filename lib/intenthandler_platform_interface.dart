@@ -26,4 +26,8 @@ abstract class IntenthandlerPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<String?> doPrint() {
+    throw UnimplementedError('doPrint() has not been implemented.');
+  }
 }
