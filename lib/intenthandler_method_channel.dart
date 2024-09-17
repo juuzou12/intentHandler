@@ -16,8 +16,13 @@ class MethodChannelIntenthandler extends IntenthandlerPlatform {
   }
 
   @override
-  Future<String?> doPrint() async {
-    final doPrintResponse = await methodChannel.invokeMethod<String>('doPrint');
-    return doPrintResponse;
+  Future<String?> callSdkIntent(Map data) async {
+    final version = await methodChannel.invokeMethod<String>('callSdkIntent', data);
+    return version;
+  }
+  @override
+  Future<String?> broadCastIntent(Map data) async {
+    final version = await methodChannel.invokeMethod<String>('broadCastIntent', data);
+    return version;
   }
 }

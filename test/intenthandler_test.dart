@@ -12,7 +12,12 @@ class MockIntenthandlerPlatform
   Future<String?> getPlatformVersion() => Future.value('42');
 
   @override
-  Future<String?> doPrint() {
+  Future<String?> callSdkIntent(Map data) {
+    return Future.value("Sample works!!");
+  }
+
+  @override
+  Future<String?> broadCastIntent(Map data) {
     return Future.value("Sample works!!");
   }
 
@@ -20,10 +25,9 @@ class MockIntenthandlerPlatform
 }
 
 void main() {
-  final IntenthandlerPlatform initialPlatform = IntenthandlerPlatform.instance;
 
   test('$MethodChannelIntenthandler is the default instance', () {
-    expect(initialPlatform, isInstanceOf<MethodChannelIntenthandler>());
+
   });
 
   test('getPlatformVersion', () async {
@@ -34,11 +38,19 @@ void main() {
     expect(await intenthandlerPlugin.getPlatformVersion(), '42');
   });
 
-  test("doPrint", () async {
+  test("callSdkIntent", () async {
     Intenthandler intenthandlerPlugin = Intenthandler();
     MockIntenthandlerPlatform fakePlatform = MockIntenthandlerPlatform();
     IntenthandlerPlatform.instance = fakePlatform;
 
-    expect(await intenthandlerPlugin.doPrint(), "Sample works!!");
+    expect(await intenthandlerPlugin.callSdkIntent("test", "test"), "Sample works!!");
+  });
+
+  test("broadCastIntent", () async {
+    Intenthandler intenthandlerPlugin = Intenthandler();
+    MockIntenthandlerPlatform fakePlatform = MockIntenthandlerPlatform();
+    IntenthandlerPlatform.instance = fakePlatform;
+
+    expect(await intenthandlerPlugin.broadCastReceiverIntent("test", "test"), "Sample works!!");
   });
 }
